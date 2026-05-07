@@ -1,3 +1,7 @@
 # composition-project
 
-commit 테스트
+## branch 컨벤션
+
+## commit message 컨벤션
+
+## merge request 컨벤션
