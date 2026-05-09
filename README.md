@@ -69,7 +69,7 @@ feature
 ## commit message 컨벤션
 
 ```
-타입: 제목
+타입: 제목  
 
 내용
 ```
