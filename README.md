@@ -9,7 +9,7 @@ master → hotfix
    ↓
 develop (default) → fix
    ↓           
-feature   
+feature-BE/KOTLIN/SWIFT   
 ```
 
 > 브랜치 네이밍 : 작업유형/기능명(케밥케이스)
@@ -130,3 +130,5 @@ feat: 작곡 페이지 개발
 ```
 
 → 목록화로 commit message 작성하고, 개발일지? 같은걸 따로 작성하는게 좋을것 같다.
+
+## 이슈관리
