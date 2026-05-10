@@ -11,16 +11,16 @@ develop (default)
    ↓    
 base-be/base-kotlin/base-swift → fix
    ↓        
-feat-be/kotlin/swift   
+feat 
 
 ```
 
 > 브랜치 네이밍 : 작업유형/기능명(케밥케이스)
 >
 > ```
-> feat-be/login-page
-> feat-kotlin/composition-page
-> feat-swift/composition-page
+> feat/login-page
+> feat/composition-page
+> feat/composition-page
 > fix/login-page
 > hotfix/login-page
 > ```
