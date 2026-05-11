@@ -70,6 +70,8 @@ feat
 
 ### Pull Request 작성
 
+  .github/pull_request_template.md 템플릿 파일
+  Pull Request 요청시 자동 템플릿 생성
 
 ---
 
