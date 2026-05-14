@@ -1,5 +1,6 @@
 # composition-project
 
+[프로젝트 노션 보러가기](https://www.notion.so/MoJak-34a81b387c9380b6a5d8cf44bf97ce36)
 ---
 
 ## branch 컨벤션
