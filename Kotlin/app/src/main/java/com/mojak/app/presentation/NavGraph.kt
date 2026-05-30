@@ -7,10 +7,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.mojak.app.presentation.start.StartPage
 import com.mojak.app.presentation.sheetCreate.SheetCreatePage
+import com.mojak.app.presentation.composition.compositionScreen
 
 sealed class Screen(val route: String){
     object Start : Screen("start")
     object SheetCreate : Screen("sheet_create")
+    object compositionScreen : Screen("composition_screen")
+
 
 }
 
@@ -31,9 +34,14 @@ fun NavGraph(
         }
         composable(Screen.SheetCreate.route){
             SheetCreatePage(
-                // onClick = {
-                //     // 악보 페이지로 이동
-                // }
+                onClick = {
+                    navController.navigate(Screen.compositionScreen.route)
+                }
+            )
+        }
+        composable(Screen.compositionScreen.route){
+            compositionScreen(
+                // 추후 추가
             )
         }
     }

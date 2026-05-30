@@ -13,9 +13,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.dp
 
-import com.mojak.app.core.design.backGround
-import com.mojak.app.core.design.mainOrange
-import com.mojak.app.core.design.Pacifico
+import com.mojak.app.core.design.mojakBeige
+import com.mojak.app.core.design.mojakOrange
+import com.mojak.app.core.design.mojakFontFamily
 import com.mojak.app.R
 
 @Composable
@@ -25,7 +25,7 @@ fun StartPage(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(backGround)
+            .background(mojakBeige)
             .clickable(
                 interactionSource = remember { MutableInteractionSource()},
                 indication = null
@@ -36,7 +36,7 @@ fun StartPage(
             horizontalAlignment = Alignment.CenterHorizontally
         ){
             Image(
-                painter = painterResource(id = R.drawable.logo1),
+                painter = painterResource(id = R.drawable.logo_ver1),
                 contentDescription = "logo",
                 modifier = Modifier
                     .width(371.dp)
@@ -47,8 +47,8 @@ fun StartPage(
         Text(
             text = "press the start button",
             fontSize = 28.sp,
-            fontFamily = Pacifico,
-            color = mainOrange,
+            fontFamily = mojakFontFamily,
+            color = mojakOrange,
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(bottom = 233.dp)

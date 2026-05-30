@@ -24,13 +24,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.dp
 
-import com.mojak.app.core.design.backGround
-import com.mojak.app.core.design.mainOrange
-import com.mojak.app.core.design.backWhite
+import com.mojak.app.core.design.mojakBeige
+import com.mojak.app.core.design.mojakOrange
+import com.mojak.app.core.design.mojakWhite
 import com.mojak.app.core.design.mojakGreen
-import com.mojak.app.core.design.inputGray
-import com.mojak.app.core.design.textBlack
-import com.mojak.app.core.design.Pacifico
+import com.mojak.app.core.design.mojakGray
+import com.mojak.app.core.design.mojakBlack
+import com.mojak.app.core.design.mojakFontFamily
 import com.mojak.app.core.design.RoundedCorner
 import com.mojak.app.core.utils.timeOptions
 import com.mojak.app.core.utils.scaleOptions
@@ -39,7 +39,9 @@ import com.mojak.app.core.utils.minBPM
 import com.mojak.app.R
 
 @Composable
-fun SheetCreatePage() {
+fun SheetCreatePage(
+    onClick: () -> Unit
+) {
 
     var sheetName by remember {mutableStateOf("")}
     var scale by remember {mutableStateOf(scaleOptions[0])}
@@ -49,11 +51,11 @@ fun SheetCreatePage() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(backGround)
+            .background(mojakBeige)
     ) {
 
         Image(
-            painter = painterResource(id = R.drawable.logo2),
+            painter = painterResource(id = R.drawable.logo_ver2),
             contentDescription = "logo",
             modifier = Modifier
                 .align(Alignment.TopCenter)
@@ -69,7 +71,7 @@ fun SheetCreatePage() {
                 .padding(horizontal = 25.dp)
                 .shadow(4.dp, RoundedCorner)
                 .clip(RoundedCorner)
-                .background(backWhite)
+                .background(mojakWhite)
                 .fillMaxWidth()
                 .height(600.dp)
                 .border(2.dp, mojakGreen, RoundedCorner)
@@ -112,7 +114,7 @@ fun SheetCreatePage() {
                 )
 
                 Button(
-                    onClick = { /* 추후 연결 */ },
+                    onClick = onClick,
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally)
                         .padding(top = 14.dp)
@@ -124,9 +126,9 @@ fun SheetCreatePage() {
                 ) {
                     Text(
                         text = "Create",
-                        fontFamily = Pacifico,
+                        fontFamily = mojakFontFamily,
                         fontSize = 30.sp,
-                        color = backWhite
+                        color = mojakWhite
                     )
                 }
             }
@@ -144,28 +146,28 @@ private fun InputField(
     Column {
         Text(
             text = label,
-            fontFamily = Pacifico,
+            fontFamily = mojakFontFamily,
             fontSize = 20.sp,
-            color = mainOrange
+            color = mojakOrange
         )
         Spacer(modifier = Modifier.height(6.dp))
         TextField(
             value = value,
             onValueChange = onValueChange,
             textStyle = TextStyle(
-                fontFamily = Pacifico,
+                fontFamily = mojakFontFamily,
                 fontSize = 16.sp,
-                color = textBlack
+                color = mojakBlack
             ),
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(RoundedCorner),
             keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
             colors = TextFieldDefaults.colors(
-                unfocusedContainerColor = inputGray,
-                focusedContainerColor = inputGray,
-                unfocusedIndicatorColor = inputGray,
-                focusedIndicatorColor = inputGray
+                unfocusedContainerColor = mojakGray,
+                focusedContainerColor = mojakGray,
+                unfocusedIndicatorColor = mojakGray,
+                focusedIndicatorColor = mojakGray
             )
         )
     }
@@ -183,9 +185,9 @@ private fun DropdownField(
     Column {
         Text(
             text = label,
-            fontFamily = Pacifico,
+            fontFamily = mojakFontFamily,
             fontSize = 20.sp,
-            color = mainOrange
+            color = mojakOrange
         )
         Spacer(modifier = Modifier.height(6.dp))
         Box {
@@ -194,15 +196,15 @@ private fun DropdownField(
                     .fillMaxWidth()
                     .height(50.dp)
                     .clip(RoundedCorner)
-                    .background(inputGray)
+                    .background(mojakGray)
                     .padding(horizontal = 16.dp),
                 contentAlignment = Alignment.CenterStart
             ) {
                 Text(
                     text = selected,
-                    fontFamily = Pacifico,
+                    fontFamily = mojakFontFamily,
                     fontSize = 16.sp,
-                    color = textBlack
+                    color = mojakBlack
                 )
 
                 Box(
@@ -214,16 +216,16 @@ private fun DropdownField(
             DropdownMenu(
                 expanded = expanded,
                 onDismissRequest = { expanded = false },
-                modifier = Modifier.background(backWhite)
+                modifier = Modifier.background(mojakWhite)
             ) {
                 options.forEach { option ->
                     DropdownMenuItem(
                         text = {
                             Text(
                                 text = option,
-                                fontFamily = Pacifico,
+                                fontFamily = mojakFontFamily,
                                 fontSize = 16.sp,
-                                color = textBlack
+                                color = mojakBlack
                             )
                         },
                         onClick = {

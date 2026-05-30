@@ -20,9 +20,10 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mojak.app.R
-import com.mojak.app.core.design.mojakBorderColor
+import com.mojak.app.core.design.mojakOrange
+import com.mojak.app.core.design.mojakBrown
 import com.mojak.app.core.design.mojakFontFamily
-import com.mojak.app.core.design.mojakTextColor
+
 
 @Composable
 fun sheetHeaderSection() {
@@ -41,7 +42,7 @@ fun sheetHeaderSection() {
         HorizontalDivider(
             modifier = Modifier.fillMaxWidth(),
             thickness = 2.dp,
-            color = mojakBorderColor
+            color = mojakOrange
         )
 
         Box(
@@ -53,7 +54,7 @@ fun sheetHeaderSection() {
         {
             Text(
                 text = "seungho's sheet",
-                color = mojakTextColor,
+                color = mojakBrown,
                 style = TextStyle(
                     fontFamily = mojakFontFamily,
                     fontSize = 25.sp
@@ -63,7 +64,7 @@ fun sheetHeaderSection() {
         HorizontalDivider(
             modifier = Modifier.fillMaxWidth(),
             thickness = 2.dp,
-            color = mojakBorderColor
+            color = mojakOrange
         )
         Row(
             modifier = Modifier
@@ -77,7 +78,7 @@ fun sheetHeaderSection() {
             ) {
                 Text(
                     text = "Scale : C",
-                    color = mojakTextColor,
+                    color = mojakBrown,
                     style = TextStyle(
                         fontFamily = mojakFontFamily,
                         fontSize = 20.sp
@@ -89,7 +90,7 @@ fun sheetHeaderSection() {
                 modifier = Modifier
                     .width(2.dp)
                     .height(48.dp)
-                    .background(mojakBorderColor)
+                    .background(mojakOrange)
             )
 
             Box(
@@ -98,7 +99,7 @@ fun sheetHeaderSection() {
             ) {
                 Text(
                     text = "Time : 4/4",
-                    color = mojakTextColor,
+                    color = mojakBrown,
                     style = TextStyle(
                         fontFamily = mojakFontFamily,
                         fontSize = 20.sp
@@ -110,7 +111,7 @@ fun sheetHeaderSection() {
         HorizontalDivider(
             modifier = Modifier.fillMaxWidth(),
             thickness = 2.dp,
-            color = mojakBorderColor
+            color = mojakOrange
         )
     }
 }

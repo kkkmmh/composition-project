@@ -18,6 +18,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.mojak.app.ui.theme.MojakTheme
+import com.mojak.app.presentation.start.StartPage
+import com.mojak.app.presentation.sheetCreate.SheetCreatePage
 import com.mojak.app.presentation.composition.compositionScreen
 
 class MainActivity : ComponentActivity() {

@@ -9,7 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.mojak.app.ui.theme.MojakTheme
-import com.mojak.app.core.design.mojakBackgroundColor
+import com.mojak.app.core.design.mojakBeige
 import com.mojak.app.presentation.composition.components.sheetHeaderSection
 import com.mojak.app.presentation.composition.components.staffSection
 
@@ -19,7 +19,7 @@ fun compositionScreen(){
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(mojakBackgroundColor)
+            .background(mojakBeige)
             .systemBarsPadding(),
         contentAlignment = Alignment.TopStart
 
@@ -27,7 +27,7 @@ fun compositionScreen(){
         Column{
             sheetHeaderSection()
             staffSection()
-         }
+        }
 
     }
 }
