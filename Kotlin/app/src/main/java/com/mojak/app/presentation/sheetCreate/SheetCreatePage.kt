@@ -33,9 +33,11 @@ import com.mojak.app.core.design.mojakBlack
 import com.mojak.app.core.design.mojakFontFamily
 import com.mojak.app.core.design.RoundedCorner
 import com.mojak.app.core.utils.timeOptions
+import com.mojak.app.core.utils.tonalityOptions
 import com.mojak.app.core.utils.scaleOptions
 import com.mojak.app.core.utils.maxBPM
 import com.mojak.app.core.utils.minBPM
+import com.mojak.app.core.utils.defaultBPM
 import com.mojak.app.R
 
 @Composable
@@ -44,8 +46,9 @@ fun SheetCreatePage(
 ) {
 
     var sheetName by remember {mutableStateOf("")}
+    var tonality by remember {mutableStateOf(tonalityOptions[0])}
     var scale by remember {mutableStateOf(scaleOptions[0])}
-    var bpm by remember {mutableStateOf("")}
+    var bpm by remember {mutableStateOf(defaultBPM)}
     var time by remember {mutableStateOf(timeOptions[0])}
 
     Box(
@@ -87,6 +90,12 @@ fun SheetCreatePage(
                     label = "Sheet Name",
                     value = sheetName,
                     onValueChange = { sheetName = it }
+                )
+                DropdownField(
+                    label = "Tonality",
+                    selected = tonality,
+                    options = tonalityOptions,
+                    onSelected = { tonality = it }
                 )
                 DropdownField(
                     label = "Scale",
