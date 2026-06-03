@@ -1,4 +1,5 @@
 package com.mojak.app.presentation.composition
+import com.mojak.app.domain.entity.Sheet
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,7 +16,7 @@ import com.mojak.app.presentation.composition.components.staffSection
 
 
 @Composable
-fun compositionScreen(){
+fun compositionScreen(sheet: Sheet){
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -25,7 +26,12 @@ fun compositionScreen(){
 
     ){
         Column{
-            sheetHeaderSection()
+            sheetHeaderSection(
+                sheetName = sheet.sheetName,
+                scale = sheet.scale,
+                timeSignature = sheet.timeSignature,
+                bpm = sheet.bpm
+            )
             staffSection()
         }
 
@@ -37,6 +43,13 @@ fun compositionScreen(){
 @Composable
 private fun compositionScreenPreview(){
     MojakTheme {
-        compositionScreen()
+        compositionScreen(
+            sheet = Sheet(
+                sheetName = "test",
+                scale = "major C",
+                timeSignature = "4/4",
+                bpm = 80
+            )
+        )
     }
 }

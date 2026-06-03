@@ -4,59 +4,47 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.TextStyle
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.dp
-
-import com.mojak.app.core.design.mojakBeige
-import com.mojak.app.core.design.mojakOrange
-import com.mojak.app.core.design.mojakWhite
-import com.mojak.app.core.design.mojakGreen
-import com.mojak.app.core.design.mojakGray
-import com.mojak.app.core.design.mojakBlack
-import com.mojak.app.core.design.mojakFontFamily
-import com.mojak.app.core.design.RoundedCorner
-import com.mojak.app.core.utils.timeOptions
-import com.mojak.app.core.utils.tonalityOptions
-import com.mojak.app.core.utils.scaleOptions
-import com.mojak.app.core.utils.maxBPM
-import com.mojak.app.core.utils.minBPM
-import com.mojak.app.core.utils.defaultBPM
+import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.mojak.app.R
+import com.mojak.app.core.design.RoundedCorner
+import com.mojak.app.core.design.mojakBeige
+import com.mojak.app.core.design.mojakFontFamily
+import com.mojak.app.core.design.mojakGreen
+import com.mojak.app.core.design.mojakWhite
+import com.mojak.app.presentation.sheetCreate.components.bpmField
+import com.mojak.app.presentation.sheetCreate.components.scaleDropdown
+import com.mojak.app.presentation.sheetCreate.components.sheetNameField
+import com.mojak.app.presentation.sheetCreate.components.timeDropdown
 
 @Composable
 fun SheetCreatePage(
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    viewModel: sheetCreateViewModel = viewModel()
 ) {
-
-    var sheetName by remember {mutableStateOf("")}
-    var tonality by remember {mutableStateOf(tonalityOptions[0])}
-    var scale by remember {mutableStateOf(scaleOptions[0])}
-    var bpm by remember {mutableStateOf(defaultBPM)}
-    var time by remember {mutableStateOf(timeOptions[0])}
+    val sheetName by viewModel.sheetName.collectAsState()
+    val tonality by viewModel.tonality.collectAsState()
+    val scale by viewModel.scale.collectAsState()
+    val bpm by viewModel.bpm.collectAsState()
+    val time by viewModel.time.collectAsState()
 
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(mojakBeige)
     ) {
-
         Image(
             painter = painterResource(id = R.drawable.logo_ver2),
             contentDescription = "logo",
@@ -86,44 +74,31 @@ fun SheetCreatePage(
                     .padding(top = 30.dp),
                 verticalArrangement = Arrangement.spacedBy(20.dp)
             ) {
-                InputField(
-                    label = "Sheet Name",
+                sheetNameField(
                     value = sheetName,
-                    onValueChange = { sheetName = it }
+                    onValueChange = viewModel::onSheetNameChange
                 )
-                DropdownField(
-                    label = "Tonality",
-                    selected = tonality,
-                    options = tonalityOptions,
-                    onSelected = { tonality = it }
+                scaleDropdown(
+                    selectedTonality = tonality,
+                    selectedScale = scale,
+                    onTonalitySelected = viewModel::onTonalityChange,
+                    onScaleSelected = viewModel::onScaleChange
                 )
-                DropdownField(
-                    label = "Scale",
-                    selected = scale,
-                    options = scaleOptions,
-                    onSelected = { scale = it }
-                )
-                InputField(
-                    label = "BPM",
+                bpmField(
                     value = bpm,
-                    onValueChange = {
-                        bpm = it
-//                        val num = it.toIntOrNull()
-//                        if (it.isEmpty() || (it.toIntOrNull() in minBPM..maxBPM)) {
-//                            bpm = it
-//                        }
-                    },
-                    keyboardType = KeyboardType.Number
+                    onValueChange = viewModel::onBpmChange,
+                    onFocusLost = viewModel::onBpmFocusLost
                 )
-                DropdownField(
-                    label = "Time",
+                timeDropdown(
                     selected = time,
-                    options = timeOptions,
-                    onSelected = { time = it }
+                    onSelected = viewModel::onTimeChange
                 )
 
                 Button(
-                    onClick = onClick,
+                    onClick = {
+                        viewModel.createSheet()
+                        onClick()
+                    },
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally)
                         .padding(top = 14.dp)
@@ -138,109 +113,6 @@ fun SheetCreatePage(
                         fontFamily = mojakFontFamily,
                         fontSize = 30.sp,
                         color = mojakWhite
-                    )
-                }
-            }
-        }
-    }
-}
-
-@Composable
-private fun InputField(
-    label: String,
-    value: String,
-    onValueChange: (String) -> Unit,
-    keyboardType: KeyboardType = KeyboardType.Text
-) {
-    Column {
-        Text(
-            text = label,
-            fontFamily = mojakFontFamily,
-            fontSize = 20.sp,
-            color = mojakOrange
-        )
-        Spacer(modifier = Modifier.height(6.dp))
-        TextField(
-            value = value,
-            onValueChange = onValueChange,
-            textStyle = TextStyle(
-                fontFamily = mojakFontFamily,
-                fontSize = 16.sp,
-                color = mojakBlack
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .clip(RoundedCorner),
-            keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
-            colors = TextFieldDefaults.colors(
-                unfocusedContainerColor = mojakGray,
-                focusedContainerColor = mojakGray,
-                unfocusedIndicatorColor = mojakGray,
-                focusedIndicatorColor = mojakGray
-            )
-        )
-    }
-}
-
-@Composable
-private fun DropdownField(
-    label: String,
-    selected: String,
-    options: List<String>,
-    onSelected: (String) -> Unit
-) {
-    var expanded by remember { mutableStateOf(false) }
-
-    Column {
-        Text(
-            text = label,
-            fontFamily = mojakFontFamily,
-            fontSize = 20.sp,
-            color = mojakOrange
-        )
-        Spacer(modifier = Modifier.height(6.dp))
-        Box {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp)
-                    .clip(RoundedCorner)
-                    .background(mojakGray)
-                    .padding(horizontal = 16.dp),
-                contentAlignment = Alignment.CenterStart
-            ) {
-                Text(
-                    text = selected,
-                    fontFamily = mojakFontFamily,
-                    fontSize = 16.sp,
-                    color = mojakBlack
-                )
-
-                Box(
-                    modifier = Modifier
-                        .matchParentSize()
-                        .clickable { expanded = true }
-                )
-            }
-            DropdownMenu(
-                expanded = expanded,
-                onDismissRequest = { expanded = false },
-                modifier = Modifier.background(mojakWhite)
-            ) {
-                options.forEach { option ->
-                    DropdownMenuItem(
-                        text = {
-                            Text(
-                                text = option,
-                                fontFamily = mojakFontFamily,
-                                fontSize = 16.sp,
-                                color = mojakBlack
-                            )
-                        },
-                        onClick = {
-                            onSelected(option)
-                            expanded = false
-                        }
                     )
                 }
             }

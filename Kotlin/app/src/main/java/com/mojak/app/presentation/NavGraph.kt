@@ -1,5 +1,6 @@
 package com.mojak.app.presentation
 
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -8,6 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import com.mojak.app.presentation.start.StartPage
 import com.mojak.app.presentation.sheetCreate.SheetCreatePage
 import com.mojak.app.presentation.composition.compositionScreen
+import com.mojak.app.presentation.sheetCreate.sheetCreateViewModel
 
 sealed class Screen(val route: String){
     object Start : Screen("start")
@@ -21,6 +23,8 @@ sealed class Screen(val route: String){
 fun NavGraph(
     navController: NavHostController = rememberNavController()
 ) {
+    val viewModel: sheetCreateViewModel = viewModel()
+
     NavHost(
         navController = navController,
         startDestination = Screen.Start.route
@@ -36,13 +40,12 @@ fun NavGraph(
             SheetCreatePage(
                 onClick = {
                     navController.navigate(Screen.compositionScreen.route)
-                }
+                },
+                viewModel = viewModel
             )
         }
         composable(Screen.compositionScreen.route){
-            compositionScreen(
-                // 추후 추가
-            )
+            compositionScreen(sheet = viewModel.createSheet())
         }
     }
 }

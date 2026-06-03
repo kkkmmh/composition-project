@@ -26,7 +26,12 @@ import com.mojak.app.core.design.mojakFontFamily
 
 
 @Composable
-fun sheetHeaderSection() {
+fun sheetHeaderSection(
+    sheetName: String,
+    scale: String,
+    timeSignature: String,
+    bpm: Int
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -53,7 +58,7 @@ fun sheetHeaderSection() {
         )
         {
             Text(
-                text = "seungho's sheet",
+                text = "${sheetName} ${bpm}",
                 color = mojakBrown,
                 style = TextStyle(
                     fontFamily = mojakFontFamily,
@@ -77,7 +82,7 @@ fun sheetHeaderSection() {
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "Scale : C",
+                    text = "Scale : ${scale}",
                     color = mojakBrown,
                     style = TextStyle(
                         fontFamily = mojakFontFamily,
@@ -98,7 +103,7 @@ fun sheetHeaderSection() {
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "Time : 4/4",
+                    text = "Time : ${timeSignature}",
                     color = mojakBrown,
                     style = TextStyle(
                         fontFamily = mojakFontFamily,
