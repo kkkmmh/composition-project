@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.unit.dp
-import com.mojak.app.core.design.mojakStaffColor
+import com.mojak.app.core.design.mojakBlack
 
 @Composable
 fun staffLine(){
@@ -16,7 +16,7 @@ fun staffLine(){
             .fillMaxWidth()
             .height(56.dp)
     ){
-        val staffColor = mojakStaffColor
+        val staffColor = mojakBlack
 
         val startX = size.width * 0.08f
         val endX = size.width * 0.96f
@@ -29,7 +29,7 @@ fun staffLine(){
             val y = topY + lineGap * index
 
             drawLine(
-                color = staffColor,
+                color = mojakBlack,
                 start = Offset(startX, y),
                 end = Offset(endX, y),
                 strokeWidth = 1f
@@ -43,7 +43,7 @@ fun staffLine(){
             val x = startX + measureWidth * index
 
             drawLine(
-                color = staffColor,
+                color = mojakBlack,
                 start = Offset(x, topY),
                 end = Offset(x, bottomY),
                 strokeWidth = 1f
