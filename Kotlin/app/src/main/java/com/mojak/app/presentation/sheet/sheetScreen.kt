@@ -1,4 +1,4 @@
-package com.mojak.app.presentation.composition
+package com.mojak.app.presentation.sheet
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,12 +10,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.mojak.app.ui.theme.MojakTheme
 import com.mojak.app.core.design.mojakBackgroundColor
-import com.mojak.app.presentation.composition.components.sheetHeaderSection
-import com.mojak.app.presentation.composition.components.staffSection
+import com.mojak.app.presentation.sheet.components.sheetHeaderSection
+import com.mojak.app.presentation.sheet.components.staffSection
 
 
 @Composable
-fun compositionScreen(){
+fun sheetScreen(){
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -26,7 +26,7 @@ fun compositionScreen(){
     ){
         Column{
             sheetHeaderSection()
-            staffSection()
+            staffSection(bpm = 80)
          }
 
     }
@@ -35,8 +35,8 @@ fun compositionScreen(){
 
 @Preview(showBackground = true)
 @Composable
-private fun compositionScreenPreview(){
+private fun sheetScreenPreview(){
     MojakTheme {
-        compositionScreen()
+        sheetScreen()
     }
 }
